@@ -702,3 +702,9 @@ class APIManager(object):
             # initalization.
             else:
                 self.apis_to_create[None].append((args, kw))
+
+    def api(self, *args, **kwargs):
+        def decorator(cls):
+            self.create_api(cls, *args, **kwargs)
+            return cls
+        return decorator
