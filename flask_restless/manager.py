@@ -800,16 +800,16 @@ class APIManager(object):
         if self.app is not None:
             self.app.register_blueprint(blueprint)
   
-  def api(self, *args, **kw):
-      """Provides a decorator for a model, that registers a ReSTful API
-      blueprint.
+    def api(self, *args, **kw):
+        """Provides a decorator for a model, that registers a ReSTful API
+        blueprint.
 
-      For example:
+        For example:
 
-      app = Flask(__name__)
-      manager = APIManager()
-      """
-      def decorator(cls):
-          self.create_api(cls, *args, **kw)
-          return cls
-      return decorator
+        app = Flask(__name__)
+        manager = APIManager()
+        """
+        def decorator(cls):
+            self.create_api(cls, *args, **kw)
+            return cls
+        return decorator
