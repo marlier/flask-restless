@@ -704,6 +704,24 @@ class APIManager(object):
                 self.apis_to_create[None].append((args, kw))
 
     def api(self, *args, **kwargs):
+        """
+        Decorator to register an API endpoint for a model via decorator.
+
+        To use:
+
+            app = Flask(__name__)
+            apimanager = APIManager()
+            db = SQLAlchemy()
+
+            @apimanager.api(url_base = '/api/base/path')
+            class Person(db.Model):
+                id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+                name = db.Column(db.String(64), nullable = False)
+
+            db.init_app(app)
+            apimanager.init_app(app, flask_sqlalchemy_db = db)
+            app.run()
+        """
         def decorator(cls):
             self.create_api(cls, *args, **kwargs)
             return cls
